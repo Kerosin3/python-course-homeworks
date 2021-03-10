@@ -31,7 +31,7 @@ def filter_numbers(in_list,num_type):
     elif num_type == 'prime':
         list_prime = []
         for num in in_list:
-            if  num > 1 and type(num)==int: #check whether it greater than 1 #num.isdigit() and
+            if  num > 1 and type(num)==int: #check whether it greater than 1 
                 for i in range(2,num+1,1):
                     if num % i == 0: 
                         if i != num: # if it is not number itself then break
