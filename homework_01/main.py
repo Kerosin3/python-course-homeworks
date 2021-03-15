@@ -34,13 +34,13 @@ def filter_numbers(in_list,num_type):
             if  num > 1 and type(num)==int: #check whether it greater than 1 
                 for i in range(2,num+1,1):
                     if num % i == 0: 
-                        if i != num: # if it is not number itself then break
+                        if i != num: # if it is not the number itself then break
                             break
-                        else:
+                        else: # if it is, then it is our prime number
                             list_prime.append(num)
                             continue
             else:
-                continue
+                continue # in case the number is 1 or not a number
         return list_prime
     else:
         raise ValueError("only 'even','odd','prime' number types are availiable")
