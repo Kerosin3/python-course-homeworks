@@ -1,5 +1,5 @@
 from abc import ABC
-from exceptions import LowFuelError,NotEnoughFuel,CargoOverload
+from exceptions import LowFuelError,NotEnoughFuel
 
 class Vehicle(ABC):
     weight = None
@@ -37,4 +37,3 @@ v0 = Vehicle(10,10500,2)
 v0.start()
 v0.start()
 v0.move(10)
-v0.password1 
