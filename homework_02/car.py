@@ -1,8 +1,8 @@
 """
 создайте класс `Car`, наследник `Vehicle`
 """
-from .base import Vehicle
-from .engine import Engine
+from base import Vehicle
+from engine import Engine
 
 class Car(Vehicle):
     engine = None

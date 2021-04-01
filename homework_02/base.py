@@ -33,7 +33,7 @@ class Vehicle(ABC):
         print('distance confirmation')
 
 
-v0 = Vehicle(10,10500,2)
-v0.start()
-v0.start()
-v0.move(10)
+#v0 = Vehicle(10,10500,2)
+#v0.start()
+#v0.start()
+#v0.move(10)
