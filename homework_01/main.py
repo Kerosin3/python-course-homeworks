@@ -18,7 +18,7 @@ ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 
-def prime_process():
+def prime_process(in_list):
     list_prime = []
     for num in in_list:
         if  num > 1 and isinstance(num, int): #check whether it greater than 1 
@@ -44,6 +44,6 @@ def filter_numbers(in_list,num_type):
     elif num_type == ODD:
         return [item for item in in_list if item % 2 != 0 and isinstance(item, int)]
     elif num_type == PRIME:
-        return prime_process()
+        return prime_process(in_list)
     else:
         raise ValueError("only 'even','odd','prime' number types are available")
