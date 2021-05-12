@@ -36,6 +36,15 @@ async def async_main():
     )
     print(res)
 
+async def async_main_v2():
+    await create_tables()
+    list_users = []
+    for i in range(5):
+        list_users.append(await get_name_username())
+    #user = User(name='alex',username='AlexVV')
+    #await add_user(user)
+    await add_user(list_users)
+
 async def get_name_username()-> (str,str):
     time_to_sleep = random.random()
     print('sleeping ',time_to_sleep,' seconds')
@@ -72,4 +81,4 @@ def creating_n_users(n:int):
     return  users,posts
 
 if __name__ == "__main__":
-    asyncio.run(async_main())
+    asyncio.run(async_main_v2())

@@ -24,6 +24,8 @@ from sqlalchemy import (
     func
 )
 
+SESSON_COUNTER = 0
+
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 #PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
@@ -66,14 +68,22 @@ async def create_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 
-async def add_user(user:User):
-    print('creating user')
+async def add_user(*args):
+    c = 0
+    print('args====',*args)
+    print('creating users\'s queque')
     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
     async with async_session() as session:
         session : AsyncSession
         async with session.begin():
-            user0 = user
-            session.add(user0)
+            # session.add(args[0])
+            #print('I am here')
+            print('I am args = ', args)
+            for u in zip(*args):
+                print('I am u = ',u)
+                session.add(*u)
+                c+=1
+        print('added ',c ,' users')
         await session.commit()
 
 async def add_post(post:Post):
