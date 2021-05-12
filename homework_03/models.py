@@ -8,7 +8,7 @@
 создайте связи relationship между моделями: User.posts и Post.user
 """
 import asyncio,os
-from sqlalchemy.ext.asyncio import  create_async_engine
+from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import (
     declarative_base,
@@ -25,6 +25,7 @@ from sqlalchemy import (
 )
 
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+#PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
 engine = create_async_engine(PG_CONN_URI,echo = True)
 Base = declarative_base()
@@ -33,8 +34,9 @@ Base = declarative_base()
 
 #для модели User обязательными являются name, username, email
 #создайте связи relationship между моделями: User.posts и Post.user
-class User():
+class User(Base):
     __tablename__ = 'Users'
+    __mapper_args__ = {'eager_defaults':True}
 
 
     id = Column(Integer,primary_key=True)
@@ -45,13 +47,48 @@ class User():
     post = relationship('Post',back_populates='user_relate')
 
 #для модели Post обязательными являются user_id, title, body
-class Post():
+class Post(Base):
     __tablename__ = 'Posts'
 
     id = Column(Integer,primary_key=True)
     title = Column(String,nullable=True,server_default='')
     body = Column(String,nullable=True,server_default='')
+
     user_id = Column(Integer,ForeignKey(User.id),nullable=False)
     user_relate = relationship("User",back_populates='post')
 
-Session = None
+#Session = None
+
+async def create_tables():
+    print('creating tables...')
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+
+
+async def add_user(user:User):
+    print('creating user')
+    async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
+    async with async_session() as session:
+        session : AsyncSession
+        async with session.begin():
+            user0 = user
+            session.add(user0)
+        await session.commit()
+
+async def add_post(post:Post):
+    print('adding post')
+    async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
+
+    async with async_session() as session:
+        session : AsyncSession
+
+        async with session.begin():
+            session.add(post)
+        await session.commit() # commiting
+
+# async def main():
+#     await create_tables()
+#
+# if __name__ == '__main__':
+#     asyncio.run(main())
