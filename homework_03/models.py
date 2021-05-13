@@ -70,20 +70,22 @@ async def create_tables():
 
 async def add_user(*args):
     c = 0
-    print('args====',*args)
     print('creating users\'s queque')
     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
     async with async_session() as session:
         session : AsyncSession
         async with session.begin():
-            # session.add(args[0])
-            #print('I am here')
-            print('I am args = ', args)
+            admin = User(name='Admin',username='Admin')
+            post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
+            session.add(admin,post)
             for u in zip(*args):
-                print('I am u = ',u)
+                print('user:',id(u))
                 session.add(*u)
+                post0 = Post(title='some_titile', body='some_body', user_relate=admin)
+                session.add(post0)
                 c+=1
         print('added ',c ,' users')
+        print('Finishing session')
         await session.commit()
 
 async def add_post(post:Post):
