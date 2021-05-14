@@ -21,10 +21,11 @@ async def async_main():
     for i in range(10):
         #list_coroutines.append(get_name_username()) # User's list
         list_coroutines.append(add_user(await get_name_username()))
+    #print('list_coroutines',list_coroutines)
     res = await asyncio.gather(
         *list_coroutines
     )
-    print(res)
+    print('res=',res)
 
 async def async_main_v2():
     await create_tables()
@@ -35,9 +36,11 @@ async def create_n_users(n_users:int):
     list_users = []
     for i in range(n_users):
         list_users.append(await get_name_username())
+    print('list_users', list_users)
     return list_users
 
-async def get_name_username()-> (str,str):
+
+async def get_name_username() -> User:
     time_to_sleep = random.random()
     print('sleeping ',time_to_sleep,' seconds')
     name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))

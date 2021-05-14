@@ -8,6 +8,8 @@
 создайте связи relationship между моделями: User.posts и Post.user
 """
 import asyncio,os
+import random
+
 from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import (
@@ -48,6 +50,9 @@ class User(Base):
 
     post = relationship('Post',back_populates='user_relate')
 
+    def __repr__(self):
+        return f"my name is {self.name},my username is {self.username}"
+        #return f"{self.name}"
 #для модели Post обязательными являются user_id, title, body
 class Post(Base):
     __tablename__ = 'Posts'
@@ -68,7 +73,7 @@ async def create_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 
-async def add_user(*args):
+async def add_user(in_list:list[User]):
     c = 0
     print('creating users\'s queque')
     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
@@ -78,11 +83,14 @@ async def add_user(*args):
             admin = User(name='Admin',username='Admin')
             post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
             session.add(admin,post)
-            for u in zip(*args):
-                print('user:',id(u))
-                session.add(*u)
-                post0 = Post(title='some_titile', body='some_body', user_relate=admin)
-                session.add(post0)
+            for u in in_list:
+            #for u in zip(*args):
+                posts = []
+                # postx = Post(title='some_titile', body='some_body', user_relate=u)
+                for j in range(random.randint(1,5)):
+                    posts.append(Post(title='some_titile', body='some_body', user_relate=u))
+                session.add(u)
+                session.add_all(posts)
                 c+=1
         print('added ',c ,' users')
         print('Finishing session')
