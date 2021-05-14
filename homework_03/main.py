@@ -18,7 +18,7 @@ import asyncio,random,string
 async def async_main():
     await create_tables()
     list_coroutines = []
-    for i in range(10):
+    async for i in range(10):
         #list_coroutines.append(get_name_username()) # User's list
         list_coroutines.append(add_user(await get_name_username()))
     #print('list_coroutines',list_coroutines)
@@ -32,6 +32,18 @@ async def async_main_v2():
     await add_user(await create_n_users(5))
     #await add_post(Post(title='title',body='body',user_relate=''))
 
+
+async def async_main_v3():
+    await create_tables()
+    list_coroutines =[]
+    for i in range(10): # creating several users
+        list_coroutines.append(await create_n_users_v2())
+    #print('list coroutines:',list_coroutines)
+    res = await asyncio.gather(
+        add_user(*list_coroutines)
+    )
+    print('res=', res)
+
 async def create_n_users(n_users:int):
     list_users = []
     for i in range(n_users):
@@ -39,6 +51,8 @@ async def create_n_users(n_users:int):
     print('list_users', list_users)
     return list_users
 
+async def create_n_users_v2():
+    return await get_name_username()
 
 async def get_name_username() -> User:
     time_to_sleep = random.random()
@@ -76,4 +90,4 @@ def creating_n_users(n:int):
     return  users,posts
 
 if __name__ == "__main__":
-    asyncio.run(async_main_v2())
+    asyncio.run(async_main_v3())

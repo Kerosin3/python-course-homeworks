@@ -73,7 +73,7 @@ async def create_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 
-async def add_user(in_list:list[User]):
+async def add_user(*args):
     c = 0
     print('creating users\'s queque')
     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
@@ -83,11 +83,9 @@ async def add_user(in_list:list[User]):
             admin = User(name='Admin',username='Admin')
             post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
             session.add(admin,post)
-            for u in in_list:
-            #for u in zip(*args):
+            for u in args:
                 posts = []
-                # postx = Post(title='some_titile', body='some_body', user_relate=u)
-                for j in range(random.randint(1,5)):
+                for j in range(random.randint(1,5)): # creating random posts for each user
                     posts.append(Post(title='some_titile', body='some_body', user_relate=u))
                 session.add(u)
                 session.add_all(posts)
