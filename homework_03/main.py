@@ -38,7 +38,6 @@ async def async_main_v3():
     list_coroutines =[]
     for i in range(10): # creating several users
         list_coroutines.append(await create_n_users_v2())
-    #print('list coroutines:',list_coroutines)
     res = await asyncio.gather(
         add_user(*list_coroutines)
     )
