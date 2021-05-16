@@ -15,78 +15,46 @@
 from models import User,Post,create_tables,add_user,add_post
 import asyncio,random,string
 
-async def async_main():
-    await create_tables()
-    list_coroutines = []
-    async for i in range(10):
-        #list_coroutines.append(get_name_username()) # User's list
-        list_coroutines.append(add_user(await get_name_username()))
-    #print('list_coroutines',list_coroutines)
-    res = await asyncio.gather(
-        *list_coroutines
-    )
-    print('res=',res)
-
-async def async_main_v2():
-    await create_tables()
-    await add_user(await create_n_users(5))
-    #await add_post(Post(title='title',body='body',user_relate=''))
-
-
 async def async_main_v3():
     await create_tables()
-    list_coroutines =[]
-    for i in range(10): # creating several users
-        list_coroutines.append(await create_n_users_v2())
+    list_users =[]
+    list_posts = []
+    for i in range(3): # creating several users
+        user = create_a_user()
+        list_users.append(user)
+        list_posts.append(create_posts_for_a_user(user=user))
+    #list_posts = [item for sublist in list_posts for item in sublist] # flatten
+    print('users=',list_users)
+    print('posts=',list_posts)
     res = await asyncio.gather(
-        add_user(*list_coroutines)
+        add_user(*list_users),
+        #add_post(*list_posts)
     )
     print('res=', res)
 
-async def create_n_users(n_users:int):
+def create_n_users(n_users:int)-> list[User]:
     list_users = []
     for i in range(n_users):
-        list_users.append(await get_name_username())
+        list_users.append(get_name_username())
     print('list_users', list_users)
     return list_users
 
-async def create_n_users_v2():
-    return await get_name_username()
+def create_a_user():
+    return get_name_username()
 
-async def get_name_username() -> User:
-    time_to_sleep = random.random()
-    print('sleeping ',time_to_sleep,' seconds')
+def get_name_username() -> User:
     name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
     nickname = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
-    print(f'creating user with name:{name},and username:{nickname}')
-    await asyncio.sleep(time_to_sleep)
+    print(f'created user with name:{name},and username:{nickname}')
     return User(name=name,username=nickname)
 
-
-# def get_name_username()-> (str,str):
-#     name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
-#     nickname = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
-#     return (name,nickname)
-
-def main():
-    pass
-
-def creating_n_users(n:int):
-    users = []
+def create_posts_for_a_user(user:User)-> list[Post]:
     posts = []
-    for i in range(n):
-        name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
-        nickname = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
-        user = User(name=name,username=nickname)
-        users.append(user)
+    for j in range(random.randint(1, 5)):  # creating random posts for a user
+        potinfo = 'post '+''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(3,7))
+        posts.append(Post(title=str(user.name)+'\'s'+ ' title', body=potinfo, user_relate=user))
+    return posts
 
-        post = Post(
-            title='some title',
-            body='some information',
-            user_relate=user
-        )
-        posts.append(post)
-    return  users,posts
 
 if __name__ == "__main__":
     asyncio.run(async_main_v3())

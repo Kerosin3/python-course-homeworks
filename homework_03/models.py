@@ -64,6 +64,8 @@ class Post(Base):
     user_id = Column(Integer,ForeignKey(User.id),nullable=False)
     user_relate = relationship("User",back_populates='post')
 
+    def __repr__(self):
+        return f"{self.user_relate.name} post is {self.title},my username is {self.body}"
 #Session = None
 
 async def create_tables():
@@ -84,26 +86,33 @@ async def add_user(*args):
             post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
             session.add(admin,post)
             for u in args:
-                posts = []
-                for j in range(random.randint(1,5)): # creating random posts for each user
-                    posts.append(Post(title='some_titile', body='some_body', user_relate=u))
+                #posts = []
+                #for j in range(random.randint(1,5)): # creating random posts for each user
+                    #posts.append(Post(title='some_titile', body='some_body', user_relate=u))
                 session.add(u)
-                session.add_all(posts)
+                print('added user', u.name)
+                #session.add_all(posts)
                 c+=1
         print('added ',c ,' users')
         print('Finishing session')
         await session.commit()
 
-async def add_post(post:Post):
+async def add_post(*args):
+    c=0
     print('adding post')
+    print('args==',args)
     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
-
     async with async_session() as session:
         session : AsyncSession
-
         async with session.begin():
-            session.add(post)
-        await session.commit() # commiting
+            for p in args:
+                print('posts=', p)
+                session.add_all(p)
+                c+=1
+                print('c is ==',c)
+        print('added ', c, ' posts')
+        print('Finishing session')
+        await session.commit() #
 
 # async def main():
 #     await create_tables()
