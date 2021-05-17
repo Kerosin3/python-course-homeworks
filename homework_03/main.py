@@ -14,6 +14,7 @@
 """
 from models import User,Post,create_tables,add_user,add_post
 import asyncio,random,string
+from jsonplaceholder_requests import get_jsonS
 
 async def async_main_v3():
     await create_tables()
@@ -31,7 +32,8 @@ async def async_main_v3():
         #add_post(*list_posts)
     )
     print('res=', res)
-
+async def async_main():
+    await create_tables()
 def create_n_users(n_users:int)-> list[User]:
     list_users = []
     for i in range(n_users):

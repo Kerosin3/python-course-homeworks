@@ -11,7 +11,7 @@ import asyncio,os
 import random
 
 from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import declarative_base, scoped_session
 from sqlalchemy.orm import (
     declarative_base,
     joinedload,
@@ -32,16 +32,14 @@ PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://
 #PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
 engine = create_async_engine(PG_CONN_URI,echo = True)
-Base = declarative_base()
+Base = declarative_base(bind=engine)
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factory)
 
 
-
-#для модели User обязательными являются name, username, email
-#создайте связи relationship между моделями: User.posts и Post.user
 class User(Base):
     __tablename__ = 'Users'
     __mapper_args__ = {'eager_defaults':True}
-
 
     id = Column(Integer,primary_key=True)
     name = Column(String,nullable=False,server_default='')
@@ -53,7 +51,7 @@ class User(Base):
     def __repr__(self):
         return f"my name is {self.name},my username is {self.username}"
         #return f"{self.name}"
-#для модели Post обязательными являются user_id, title, body
+
 class Post(Base):
     __tablename__ = 'Posts'
 
