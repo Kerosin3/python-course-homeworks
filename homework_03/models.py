@@ -74,6 +74,7 @@ async def create_tables():
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
+#async def add_admin
 
 async def add_user(*args):
     c = 0
@@ -82,9 +83,9 @@ async def add_user(*args):
     async with async_session() as session:
         session : AsyncSession
         async with session.begin():
-            admin = User(name='Admin',username='Admin')
-            post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
-            session.add(admin,post)
+            #admin = User(name='Admin',username='Admin')
+            #post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
+            #session.add(admin,post)
             for u in args:
                 #posts = []
                 #for j in range(random.randint(1,5)): # creating random posts for each user
