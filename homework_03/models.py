@@ -9,7 +9,6 @@
 """
 import asyncio,os
 import random
-
 from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, scoped_session
 from sqlalchemy.orm import (
@@ -26,16 +25,13 @@ from sqlalchemy import (
     func
 )
 
-SESSON_COUNTER = 0
 
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
-#PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
-
 engine = create_async_engine(PG_CONN_URI,echo = True)
 Base = declarative_base(bind=engine)
-session_factory = sessionmaker(bind=engine)
+session_factory = sessionmaker(bind=engine,class_=AsyncSession,expire_on_commit=False)
 Session = scoped_session(session_factory)
-
+print('=======initializing a session===========')
 
 class User(Base):
     __tablename__ = 'Users'
@@ -63,8 +59,7 @@ class Post(Base):
     user_relate = relationship("User",back_populates='post')
 
     def __repr__(self):
-        return f"{self.user_relate.name} post is {self.title},my username is {self.body}"
-#Session = None
+        return f"{self.user_relate} post is {self.title},my username is {self.body}"
 
 async def create_tables():
     print('creating tables...')
@@ -73,48 +68,51 @@ async def create_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 #async def add_admin
+#
+# async def add_user(*args):
+#     c = 0
+#     print('creating users\'s queque')
+#     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
+#     async with async_session() as session:
+#         session : AsyncSession
+#         async with session.begin():
+#             #admin = User(name='Admin',username='Admin')
+#             #post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
+#             #session.add(admin,post)
+#             for u in args:
+#                 #posts = []
+#                 #for j in range(random.randint(1,5)): # creating random posts for each user
+#                     #posts.append(Post(title='some_titile', body='some_body', user_relate=u))
+#                 session.add(u)
+#                 print('added user', u.name)
+#                 #session.add_all(posts)
+#                 c+=1
+#         print('added ',c ,' users')
+#         print('Finishing session')
+#         await session.commit()
+#
+# async def add_post(*args):
+#     c=0
+#     print('adding post')
+#     print('args==',args)
+#     async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
+#     async with async_session() as session:
+#         session : AsyncSession
+#         async with session.begin():
+#             for p in args:
+#                 print('posts=', p)
+#                 session.add_all(p)
+#                 c+=1
+#                 print('c is ==',c)
+#         print('added ', c, ' posts')
+#         print('Finishing session')
+#         await session.commit() #
+#
 
-async def add_user(*args):
-    c = 0
-    print('creating users\'s queque')
-    async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
-    async with async_session() as session:
-        session : AsyncSession
-        async with session.begin():
-            #admin = User(name='Admin',username='Admin')
-            #post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
-            #session.add(admin,post)
-            for u in args:
-                #posts = []
-                #for j in range(random.randint(1,5)): # creating random posts for each user
-                    #posts.append(Post(title='some_titile', body='some_body', user_relate=u))
-                session.add(u)
-                print('added user', u.name)
-                #session.add_all(posts)
-                c+=1
-        print('added ',c ,' users')
-        print('Finishing session')
-        await session.commit()
 
-async def add_post(*args):
-    c=0
-    print('adding post')
-    print('args==',args)
-    async_session = sessionmaker(engine,class_=AsyncSession,expire_on_commit=False)
-    async with async_session() as session:
-        session : AsyncSession
-        async with session.begin():
-            for p in args:
-                print('posts=', p)
-                session.add_all(p)
-                c+=1
-                print('c is ==',c)
-        print('added ', c, ' posts')
-        print('Finishing session')
-        await session.commit() #
 
 # async def main():
 #     await create_tables()
 #
 # if __name__ == '__main__':
-#     asyncio.run(main())
+#     asyncio.run(main_test())

@@ -12,7 +12,7 @@
   (используйте полученные из запроса данные, передайте их в функцию для добавления в БД)
 - закрытие соединения с БД
 """
-from models import User,Post,create_tables,add_user,add_post
+from models import User,Post,create_tables
 import asyncio,random,string
 from jsonplaceholder_requests import get_jsonS
 
