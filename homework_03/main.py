@@ -2,6 +2,8 @@ from jsonplaceholder_requests import get_jsonS,users,posts,parse_posts,parse_use
 from models import create_tables,Session
 import asyncio
 from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
+
+
 async def main_test():
     await create_tables()
     users_list = await get_jsonS(users)
@@ -24,6 +26,9 @@ async def add_info(input:list):
         print(f'added {count} entities')
         await session.commit()
 
+def main():
+    asyncio.run(main_test())
+
 
 if __name__ == '__main__':
-    asyncio.run(main_test())
+    main()
