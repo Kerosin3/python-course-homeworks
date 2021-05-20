@@ -1,7 +1,7 @@
-from . import models, jsonplaceholder_requests, _old_main_old
+from . import models, jsonplaceholder_requests, main
 
 __all__ = [
     "models",
     "jsonplaceholder_requests",
-    "_old_main_old.py",
+    "main",
 ]
