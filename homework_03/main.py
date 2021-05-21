@@ -1,6 +1,6 @@
 from jsonplaceholder_requests import get_jsonS,users,posts,parse_posts,parse_users
 from models import create_tables,Session
-import asyncio
+import asyncio,os
 from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
 
 
