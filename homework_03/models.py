@@ -42,7 +42,7 @@ class User(Base):
     username = Column(String,nullable=False,server_default='')
     email = Column(String,nullable=False,server_default='nowhere@nowhere.com')
 
-    post = relationship('Post',back_populates='user_relate')
+    posts = relationship('Post',back_populates='user')
 
     def __repr__(self):
         return f"my name is {self.name},my username is {self.username}"
@@ -56,10 +56,10 @@ class Post(Base):
     body = Column(String,nullable=True,server_default='')
 
     user_id = Column(Integer,ForeignKey(User.id),nullable=False)
-    user_relate = relationship("User",back_populates='post')
+    user = relationship("User",back_populates='posts')
 
     def __repr__(self):
-        return f"{self.user_relate} post is {self.title},my username is {self.body}"
+        return f"{self.user} post is {self.title},my username is {self.body}"
 
 async def create_tables():
     print('creating tables...')
@@ -77,12 +77,12 @@ async def create_tables():
 #         session : AsyncSession
 #         async with session.begin():
 #             #admin = User(name='Admin',username='Admin')
-#             #post = Post(title='admin_post_title', body='admin_post_body', user_relate=admin)
+#             #post = Post(title='admin_post_title', body='admin_post_body', user=admin)
 #             #session.add(admin,post)
 #             for u in args:
 #                 #posts = []
 #                 #for j in range(random.randint(1,5)): # creating random posts for each user
-#                     #posts.append(Post(title='some_titile', body='some_body', user_relate=u))
+#                     #posts.append(Post(title='some_titile', body='some_body', user=u))
 #                 session.add(u)
 #                 print('added user', u.name)
 #                 #session.add_all(posts)

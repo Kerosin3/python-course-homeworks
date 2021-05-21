@@ -29,6 +29,8 @@ async def add_info(input:list):
 def main():
     asyncio.run(main_test())
 
+async def async_main():
+    pass
 
 if __name__ == '__main__':
     main()
