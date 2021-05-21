@@ -3,33 +3,40 @@
 """
 from aiohttp import ClientSession
 import asyncio
-from models import User,Post
+from models import User, Post
+
+
 class Data0:
-    def __init__(self,type:str,url:str):
+    def __init__(self, type: str, url: str):
         self.type = type
         self.url = url
+
     def __repr__(self):
         return f'my type is {self.type},my url is:{self.url}'
+
 
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
 POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
 
-users = Data0(type='users',url=USERS_DATA_URL)
-posts = Data0(type='posts',url=POSTS_DATA_URL)
+users = Data0(type='users', url=USERS_DATA_URL)
+posts = Data0(type='posts', url=POSTS_DATA_URL)
 
-async def get_response(client: ClientSession,url:str)-> dict:
+
+async def get_response(client: ClientSession, url: str) -> dict:
     async with client.get(url) as resp:
-        assert resp.status == 200 # ok
-        return await resp.json() # returning json
+        assert resp.status == 200  # ok
+        return await resp.json()  # returning json
 
-async def get_jsonS(data_raw:Data0): # accepting Data0 type
+
+async def get_jsonS(data_raw: Data0):  # accepting Data0 type
     async with ClientSession() as session:
-        result = await get_response(session,data_raw.url)
+        result = await get_response(session, data_raw.url)
     print('Success getting json')
-    print('data fetched:',data_raw.url,data_raw.type,'result=',result)
-    return result #list of dict
+    print('data fetched:', data_raw.url, data_raw.type, 'result=', result)
+    return result  # list of dict
 
-def parse_users(input:dict):
+
+def parse_users(input: dict):
     list_users = []
     for j in input:
         temp = User()
@@ -40,9 +47,9 @@ def parse_users(input:dict):
         list_users.append(temp)
     return list_users
 
-def parse_posts(input:dict):
+
+def parse_posts(input: dict):
     list_posts = []
-    print('we are here')
     for j in input:
         temp = Post()
         temp.id = j['id']
@@ -51,6 +58,7 @@ def parse_posts(input:dict):
         temp.body = j['body']
         list_posts.append(temp)
     return list_posts
+
 
 
 
