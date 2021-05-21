@@ -28,6 +28,7 @@ from sqlalchemy import (
 
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 print('got PG CONN URI===',PG_CONN_URI)
+print('OS ENVIRONMENT IS',os.environ)
 engine = create_async_engine(PG_CONN_URI,echo = True)
 Base = declarative_base(bind=engine)
 session_factory = sessionmaker(bind=engine,class_=AsyncSession,expire_on_commit=False)
