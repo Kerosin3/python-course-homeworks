@@ -34,6 +34,7 @@ def parse_users(input:dict):
     for j in input:
         temp = User()
         temp.id = j['id']
+        temp.name = j['name']
         temp.username = j['username']
         temp.email = j['email']
         list_users.append(temp)

@@ -24,6 +24,7 @@ from sqlalchemy import (
     ForeignKey,
     func
 )
+#for git tests
 os.environ["SQLALCHEMY_PG_CONN_URI"] = 'postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres'
 #SQLALCHEMY_PG_CONN_URI = 'postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres'
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
