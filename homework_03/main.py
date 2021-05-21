@@ -15,7 +15,7 @@ async def async_main():
     postsZ = parse_posts(posts_list)
     await add_info(usersZ)
     await add_info(postsZ)
-    await get_posts_from_a_user(id=5) # test users and post getting
+    #await get_posts_from_a_user(id=5) # test users and post getting
 
 
 async def add_info(input: list):
@@ -36,7 +36,6 @@ async def get_posts_from_a_user(id:int) -> list:
     posts = []
     c = 0
     async with some_session as session:
-        #user_t = select(User).options(selectinload(User.posts))
         result = await session.execute(select(User).
                                        where(User.id == id).options(selectinload(User.posts)))
         result2 = await session.execute(select(Post).

@@ -24,14 +24,18 @@ from sqlalchemy import (
     ForeignKey,
     func
 )
-
+import platform
 # for git tests
 # os.environ["SQLALCHEMY_PG_CONN_URI"] = 'postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres'
-SQLALCHEMY_PG_CONN_URI = 'postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres'
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
-print('got PG CONN URI===', PG_CONN_URI)
-print('OS ENVIRONMENT IS', os.environ)
-engine = create_async_engine(PG_CONN_URI, echo=True)
+
+if 'arch' in platform.release():
+    SQLALCHEMY_PG_CONN_URI = os.environ.get(
+        "SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+else:
+    SQLALCHEMY_PG_CONN_URI = 'postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres'
+# print('got PG CONN URI===', PG_CONN_URI)
+# print('OS ENVIRONMENT IS', os.environ)
+engine = create_async_engine(SQLALCHEMY_PG_CONN_URI, echo=True)
 Base = declarative_base(bind=engine)
 session_factory = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 Session = scoped_session(session_factory)
