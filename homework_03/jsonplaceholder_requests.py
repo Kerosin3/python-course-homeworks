@@ -58,9 +58,3 @@ def parse_posts(input: dict):
         temp.body = j['body']
         list_posts.append(temp)
     return list_posts
-
-
-
-
-# if __name__ == '__main__':
-#     asyncio.run(main_test())
