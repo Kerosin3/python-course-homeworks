@@ -4,7 +4,7 @@ import asyncio
 from sqlalchemy.ext.asyncio import  create_async_engine, AsyncSession
 
 
-async def main_test():
+async def async_main():
     await create_tables()
     users_list = await get_jsonS(users)
     posts_list = await get_jsonS(posts)
@@ -27,10 +27,10 @@ async def add_info(input:list):
         await session.commit()
 
 def main():
-    asyncio.run(main_test())
+    asyncio.run(async_main())
 
-async def async_main():
-    pass
+# async def async_main():
+#     pass
 
 if __name__ == '__main__':
     main()
