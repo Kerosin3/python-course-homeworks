@@ -1,4 +1,4 @@
-from jsonplaceholder_requests import get_jsonS, users, posts, parse_posts, parse_users
+from jsonplaceholder_requests import getting_data_from_remote, users, posts, parse_posts, parse_users
 from models import create_tables, Session
 import asyncio, os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
@@ -9,13 +9,13 @@ from sqlalchemy.orm import selectinload, joinedload
 
 async def async_main():
     await create_tables()
-    users_list = await get_jsonS(users)
-    posts_list = await get_jsonS(posts)
+    users_list = await getting_data_from_remote(users)
+    posts_list = await getting_data_from_remote(posts)
     usersZ = parse_users(users_list)
     postsZ = parse_posts(posts_list)
     await add_info(usersZ)
     await add_info(postsZ)
-    # await get_posts_from_a_user(id=5) # test users and post getting
+    #await get_posts_from_a_user(id=5) # test users and post getting
 
 
 async def add_info(input: list):
@@ -28,7 +28,6 @@ async def add_info(input: list):
                 session.add(item)
                 count += 1
         print(f'added {count} entities')
-        await session.commit()
 
 
 async def get_posts_from_a_user(id: int) -> list:

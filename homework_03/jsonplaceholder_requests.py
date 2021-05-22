@@ -4,12 +4,12 @@
 from aiohttp import ClientSession
 import asyncio
 from models import User, Post
+from dataclasses import dataclass
 
-
-class Data0:
-    def __init__(self, type: str, url: str):
-        self.type = type
-        self.url = url
+@dataclass
+class data_storage:
+    type : str
+    url : str
 
     def __repr__(self):
         return f'my type is {self.type},my url is:{self.url}'
@@ -18,8 +18,8 @@ class Data0:
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
 POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
 
-users = Data0(type='users', url=USERS_DATA_URL)
-posts = Data0(type='posts', url=POSTS_DATA_URL)
+users = data_storage(type='users', url=USERS_DATA_URL)
+posts = data_storage(type='posts', url=POSTS_DATA_URL)
 
 
 async def get_response(client: ClientSession, url: str) -> dict:
@@ -28,7 +28,7 @@ async def get_response(client: ClientSession, url: str) -> dict:
         return await resp.json()  # returning json
 
 
-async def get_jsonS(data_raw: Data0):  # accepting Data0 type
+async def getting_data_from_remote(data_raw: data_storage):  # accepting data_storage type
     async with ClientSession() as session:
         result = await get_response(session, data_raw.url)
     print('Success getting json')
