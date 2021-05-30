@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+date0=$(date +'%d-%m-20%y')
+echo $date0
+export FLASK_ENV=development
+echo "Running Flask in Developer mode"
+flask run
