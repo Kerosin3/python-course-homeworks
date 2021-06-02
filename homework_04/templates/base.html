@@ -20,11 +20,13 @@
 
         {#    font    #}
         <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/SquadaOne-Regular.ttf') }}">
+{#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/SquadaOne-Regular.ttf') }}">#}
+{#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/DaddyTimeMono_Nerd_Font_Complete.ttf') }}">#}
+
         {#   default font style   #}
         <style>
             html {
-                font-family: SquadaOne, serif;
+                font-family: Sofia, serif;
                 font-size: 22px;
                 background-color: aliceblue;
             }
@@ -36,7 +38,8 @@
             a {
                 text-decoration: none;
             }
-        </style><title> a title?</title>
+        </style>
+        <title> a title?</title>
     {% endblock %}
 </head>
 

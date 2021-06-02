@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {#this title if for this page#}
 {% block title %}
-This is main(index) page
+    This is main(index) page
 {% endblock %}
 {#this head is for this page!#}
 {% block head %}
-<style>
+    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/DaddyTimeMono_Nerd_Font_Complete.ttf') }}">
+    <style>
         html {
             font-family: "Source Code Pro Black", serif;
             font-size: 22px;
