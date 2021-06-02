@@ -1,51 +1,74 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+    {% block title %}
+        Default title
+    {% endblock %}
+</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<head>
+    {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap JS -->
- <script> src="{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"</script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
 
-    <title>
-      {% block title %}
-        Base
-      {% endblock %}
-    </title>
-  </head>
+        <!-- Bootstrap JS -->
+        <script> src = "{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"</script>
+
+        {#    font    #}
+        <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/SquadaOne-Regular.ttf') }}">
+        {#   default font style   #}
+        <style>
+            html {
+                font-family: SquadaOne, serif;
+                font-size: 22px;
+                background-color: aliceblue;
+            }
+
+            h1 {
+                background-color: crimson;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        </style><title> a title?</title>
+    {% endblock %}
+</head>
 
 
-  <body>
 
-    {# nav bar #}
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <div class="container-fluid">
+<body>
+
+{# nav bar #}
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
         <a class="navbar-brand" href="{{ url_for('index') }}">App</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a href="{{ url_for('about') }}"
-               class="nav-link {% if request.endpoint == 'about' -%}active{%- endif %}"
-            >
-              About
-            </a>
-          </div>
+            <div class="navbar-nav">
+                <a href="{{ url_for('about') }}"
+                   class="nav-link {% if request.endpoint == 'about' -%}active{%- endif %}"
+                >
+                    About
+                </a>
+            </div>
         </div>
-      </div>
-    </nav>
-
-    <div class="container">
-      {% block body %}
-        Hello base!
-      {% endblock %}
     </div>
-  </body>
+</nav>
+
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+</body>
 
 </html>
