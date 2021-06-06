@@ -7,24 +7,24 @@
 </title>
 
 <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    {#        <script> src = "{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"</script>#}
+
+    {#   legacy fonting code    #}
+    {#        <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>#}
+    {#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/SquadaOne-Regular.ttf') }}">#}
+    {#         <link rel="stylesheet" href="{{ url_for('static',filename='fonts/DaddyTimeMono_Nerd_Font_Complete.ttf') }}">#}
+    {#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/OpenDyslexicAlta Bold Nerd Font Complete.otf') }}">#}
+    {#        <link href="../static/fonts/style.css" rel="stylesheet"/>#}
     {% block head %}
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-        <!-- Bootstrap JS -->
-        {#        <script> src = "{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"</script>#}
-
-        {#   legacy fonting code    #}
-        {#        <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>#}
-        {#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/SquadaOne-Regular.ttf') }}">#}
-        {#         <link rel="stylesheet" href="{{ url_for('static',filename='fonts/DaddyTimeMono_Nerd_Font_Complete.ttf') }}">#}
-        {#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/OpenDyslexicAlta Bold Nerd Font Complete.otf') }}">#}
-        {#        <link href="../static/fonts/style.css" rel="stylesheet"/>#}
-
         <style>
 
             @font-face {
