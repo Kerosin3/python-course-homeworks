@@ -12,7 +12,7 @@ COPY info.sh .
 ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
 
-CMD ["echo","========!!!!!!!!!!!!!!!!!!!!!!!!============"]
+#CMD ["echo","========!!!!!!!!!!!!!!!!!!!!!!!!============"] # runned only once
 
 RUN chmod +x info.sh
 
