@@ -1,0 +1,21 @@
+#!/usr/bin/zsh
+date0=$(date +'%d-%m-20%y')
+echo current date is $date0
+#app_flask="$PWD"/"$( basename "web_app/app.py" )"
+flask_app="app.py"
+flask_app=$PWD/$flask_app
+#echo app is $flask_app
+if [ -e $flask_app ]
+then
+  echo "file app exists"
+  echo flask_app is $flask_app
+  export FLASK_ENV=development
+  export FLASK_APP=$flask_app
+  echo "Running Flask in Developer mode"
+  #echo $FLASK_APP
+  #echo $PWD
+  flask run
+else
+  echo "file app does not exist, aborting"
+  exit 1
+fi

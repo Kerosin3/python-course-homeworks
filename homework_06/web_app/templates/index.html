@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{#this title if for this page#}
+{% block title %}
+    This is main(index) page
+{% endblock %}
+{#this head is for this page!#}
+{% block head %}
+    {#    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/DaddyTimeMono_Nerd_Font_Complete.ttf') }}">#}
+    <style>
+        @font-face {
+            font-family: "MagenthaRegular";
+            src: url("{{ url_for('static', filename='fonts/MagenthaRegular.eot') }}?") format("eot"),
+            url("{{ url_for('static', filename='fonts/MagenthaRegular.woff') }}?") format("woff"),
+            url("{{ url_for('static', filename='fonts/MagenthaRegular.ttf') }}?") format("truetype"),
+            url("{{ url_for('static', filename='fonts/MagenthaRegular.svg') }}?") format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: MagenthaRegular, serif;
+            font-size: 26px;
+            background-color: aliceblue;
+        }
+
+        h1 {
+            background-color: cyan;
+        }
+
+        a {
+            text-decoration: blue;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="alert alert-info" role="alert">
+        Warning! This is a test project!
+    </div>
+    <h1>Hello web!</h1>
+    <h2>Index(main) page is styled with a specific style</h2>
+{% endblock %}

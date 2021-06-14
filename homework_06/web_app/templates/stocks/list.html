@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+stock list
+{% endblock %}
+
+
+{% block body %}
+    <div>
+    <h1> Here you see all stocks</h1>
+    <ul>
+        {% for stock in stocks %}
+        <li>{{ stock.ticker }},  stoks's prices: {{ stock.price }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+
+
+{% endblock %}
