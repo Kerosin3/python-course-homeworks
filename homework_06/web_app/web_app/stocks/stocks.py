@@ -29,7 +29,7 @@ def get_stock(stock_ticker):
 
 @stocks_app.route("/list/")
 def list():
-    return render_template("stocks/list.html",stocks=STOCKS_DB)
+    return render_template("stocks/list.html", stocks=STOCKS_DB)
 
 
 @stocks_app.route("/")
