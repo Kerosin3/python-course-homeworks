@@ -17,3 +17,8 @@ class Stock:
 
     def get_price(self):
         return self.price[-1]
+
+
+    # @staticmethod
+    # def del_stock(self):
+    #     del self

@@ -61,28 +61,34 @@
 {# nav bar #}
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{{ url_for('stocks_app.list') }}"> Stocks app</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">To Main App</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a href="{{ url_for('products') }}"
-                   class="nav-link {% if request.endpoint == 'products' -%}active{%- endif %}">
-                    Show products
+                <a href="{{ url_for('stocks_app.list') }}"
+                   class="nav-link {% if request.endpoint == 'about' -%}active{%- endif %}">
+                    Show stocks
                 </a>
             </div>
         <div class="navbar-nav">
-                <a href="{{ url_for('add') }}"
+                <a href="{{ url_for('stocks_app.add_stock') }}"
                    class="nav-link {% if request.endpoint == 'add' -%}active{%- endif %}">
-                    Add product
+                    Add stock
                 </a>
             </div>
         <div class="navbar-nav">
-                <a href="{{ url_for('test') }}"
-                   class="nav-link {% if request.endpoint == 'test' -%}active{%- endif %}">
-                    Test_Test
+                <a href="{{ url_for('stocks_app.remove_stock') }}"
+                   class="nav-link {% if request.endpoint == 'remove' -%}active{%- endif %}">
+                    Remove stock
+                </a>
+            </div>
+        <div class="navbar-nav">
+                <a href="{{ url_for('stocks_app.plot') }}"
+                   class="nav-link {% if request.endpoint == 'plot' -%}active{%- endif %}">
+                    Show plot P/E
                 </a>
             </div>
         </div>

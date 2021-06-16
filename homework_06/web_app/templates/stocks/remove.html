@@ -6,21 +6,20 @@
 
 
 {% block body %}
-    <h1> Here you cann add a stock, please enter a ticker</h1>
+    <h1> Here you cann remove a stock, please enter a ticker</h1>
     <div>
-        <h1>add new stock</h1>
+        <h1>Remove a stock</h1>
         <form method="post">
             <label for="stock_ticker">Stock ticker:</label>
             <input
                     id="stock_ticker_input"
                     name="stock_ticker"
                     type="text"
-                    minlength="4"
-                    maxlength="4"
+                    lang="en"
                     placeholder="NVDA"
                     required
             >
-            <button type="submit">Add</button>
+            <button type="submit">Remove</button>
         </form>
     </div>
 {% endblock %}

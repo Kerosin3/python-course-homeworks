@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'stocks/base.html' %}
 
 {% block title %}
 stock list
@@ -7,10 +7,11 @@ stock list
 
 {% block body %}
     <div>
-    <h1> Here you see all stocks</h1>
+    <h1> Here you can see all the stocks</h1>
     <ul>
-        {% for stock in stocks %}
-        <li>{{ stock.ticker }},  stoks's prices: {{ stock.price }}</li>
+        {% for (ticker,value) in stocks.items() %}
+{#            n,name = ticker#}
+        <li> Stock №{{ loop.index }}, ticker: {{ ticker }}  its last prices: {{ value.price }}</li>
         {% endfor %}
     </ul>
     </div>

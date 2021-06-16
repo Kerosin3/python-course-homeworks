@@ -6,7 +6,6 @@ app = Flask(__name__)
 app.register_blueprint(stocks_app)
 
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -25,6 +24,7 @@ def products():
 @app.route("/products/add/")
 def add():
     return render_template("add.html")
+
 
 @app.route("/test/")
 def test():
