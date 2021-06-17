@@ -19,3 +19,4 @@ else
   echo "file app does not exist, aborting"
   exit 1
 fi
+#docker-compose up database_local
