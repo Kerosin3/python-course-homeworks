@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+
+  database_local:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: "STOCKS_DB"
+      POSTGRES_USER: "USER"
+      POSTGRES_PASSWORD: "PASSWORD"
+    volumes:
+      - db_data/pg-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

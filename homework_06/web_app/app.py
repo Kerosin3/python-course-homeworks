@@ -1,5 +1,5 @@
-from flask import Flask, render_template,jsonify,Blueprint
-from stocks.stocks import stocks_app
+from flask import Flask, render_template
+from web_app.web_app.stocks.stocks import stocks_app
 
 app = Flask(__name__)
 
