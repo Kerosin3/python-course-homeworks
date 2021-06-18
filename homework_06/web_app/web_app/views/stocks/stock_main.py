@@ -5,12 +5,13 @@ def gen_stock_prices(n:int=10):
     list_prices=[]
     for i in range(n):
         list_prices.append(randint(0,55))
-    return list_prices
+    return sum(list_prices)
 
 @dataclass
 class Stock:
     ticker: str
-    price:list[int]
+    price: int = 0
+    # price:list[int]
 
     def add_price(self,price:int=0):
         self.price.append(price)
