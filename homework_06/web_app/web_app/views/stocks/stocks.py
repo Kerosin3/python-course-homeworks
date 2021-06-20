@@ -1,7 +1,8 @@
 from flask import request, Blueprint, jsonify, render_template, url_for, redirect
 from werkzeug.exceptions import BadRequest
 from .stock_main import Stock,gen_stock_prices
-
+# from models import Stock_db
+from web_app.web_app.models.stocks import Stock_db
 
 stocks_app = Blueprint("stocks_app",
                        __name__,
@@ -29,7 +30,8 @@ def get_stock(stock_ticker):
 
 @stocks_app.route("/list/")
 def list():
-    return render_template("stocks/list.html", stocks=STOCKS_DB)
+    stocks_all = Stock_db.query.all()
+    return render_template("stocks/list.html", stocks=stocks_all)
 
 
 @stocks_app.route("/")

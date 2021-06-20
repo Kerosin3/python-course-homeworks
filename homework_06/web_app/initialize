@@ -20,3 +20,4 @@ else
   exit 1
 fi
 #docker-compose up database_local
+# FLASK_ENV=development flask db upgrade

@@ -1,7 +1,8 @@
 from flask import Flask, render_template
-from web_app.web_app.views.stocks.stocks import stocks_app
-from web_app.web_app.models import db
-
+from .web_app.views.stocks.stocks import stocks_app
+# from web_app.web_app.models import db
+# from .web_app.models import db
+from web_app.web_app.models.database import db
 from flask_migrate import Migrate
 
 app = Flask(__name__)
@@ -10,7 +11,7 @@ app = Flask(__name__)
 app.register_blueprint(stocks_app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgesql://USER:PASSWORD@localhost:5432:/app'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
 
 
 db.init_app(app)
@@ -47,3 +48,6 @@ def test():
 def create_all_tables():
     with app.app_context():
         migrate.upgrade()
+
+if __name__ == '__main__':
+    app.run(debug=True)

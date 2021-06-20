@@ -1,6 +1,6 @@
 from os import getenv
 
-SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI",'sqlite:///:memory:')
+SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI","postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB")
 
 class Config(object): #default
     DEBUG = True

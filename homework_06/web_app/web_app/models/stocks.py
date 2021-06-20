@@ -1,12 +1,12 @@
 from sqlalchemy import Column,Integer,String
 from sqlalchemy.orm import relationship
 
-from ..models.database import db
+# from ..models.database import db
+from .database import db
 
-
-class Stock(db.Model):
-    __tablename__ = 'Stocks'
-    __mapper_args__ = {'eager_defaults',True}
+class Stock_db(db.Model):
+    # __tablename__ = 'Stocks'
+    # __mapper_args__ = {'eager_defaults',True}
     id = Column(Integer,primary_key=True)
     name = Column(String,nullable=False,unique=False,server_default='')
     price = Column(Integer,nullable=True,unique=False,server_default='0')

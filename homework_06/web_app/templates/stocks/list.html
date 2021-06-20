@@ -9,9 +9,9 @@
     <div>
         <h1> Here you can see all the stocks</h1>
         <ul>
-            {% for (ticker,value) in stocks.items() %}
+            {% for stock in stocks %}
                 {#            n,name = ticker#}
-                <li> Stock №{{ loop.index }}, ticker: {{ ticker }} its last prices: {{ value.price }}</li>
+                <li> Stock №{{ loop.index }}, ticker: {{ stock.name }} its last prices: {{ stock.price }}</li>
             {% endfor %}
         </ul>
     </div>
