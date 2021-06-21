@@ -6,7 +6,7 @@
 
 
 {% block body %}
-    <h1> Here you cann remove a stock, please enter a ticker</h1>
+    <h1> Here you can remove a stock, please enter a ticker</h1>
     <div>
         <h1>Remove a stock</h1>
         <form method="post">
@@ -21,5 +21,14 @@
             >
             <button type="submit">Remove</button>
         </form>
+    </div>
+    <div>
+        <h1> Here you can see all the stocks</h1>
+        <ul>
+            {% for stock in stocks %}
+                {#            n,name = ticker#}
+                <li> Stock №{{ loop.index }}, ticker: {{ stock.name }} its last prices: {{ stock.price }}</li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}

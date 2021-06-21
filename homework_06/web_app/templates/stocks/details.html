@@ -1,0 +1,15 @@
+{% extends 'stocks/base.html' %}
+
+{% block title %}
+    stock details
+{% endblock %}
+
+
+{% block body %}
+    <div>
+        <h1>Stock #{{ stock.id }} name is <code>{{ stock.name }}</code> and its price <code>{{ stock.price }}</code>
+        </h1>
+    </div>
+
+
+{% endblock %}

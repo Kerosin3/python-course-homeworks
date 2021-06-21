@@ -4,15 +4,18 @@ from .web_app.views.stocks.stocks import stocks_app
 # from .web_app.models import db
 from web_app.web_app.models.database import db
 from flask_migrate import Migrate
+import config
+
 
 app = Flask(__name__)
 
 # app.config.from_object('config.DevelopmentConfig')
 app.register_blueprint(stocks_app)
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
-
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
+config_name = "DevelopmentConfig"
+app.config.from_object("config.DevelopmentConfig")
 
 db.init_app(app)
 migrate = Migrate(app,db) #откуда он знает про db?
