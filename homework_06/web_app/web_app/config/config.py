@@ -11,13 +11,18 @@ class Config(object):  # default
 
 
 class ProductionConfig(Config):
-    DATABASE_URI = SQLALCHEMY_DATABASE_URI
-    DEBUG = False
-
-
-class DevelopmentConfig(Config):
+    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
     DEBUG = True
 
 
+class DevelopmentConfig(Config):
+    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
+    DEBUG = True
+    # DATABASE_URI = SQLALCHEMY_DATABASE_URI
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = True
+    ENV = 'development'
+
 class TestingConfig(Config):
     TESTING = True
+    DEBUG = True

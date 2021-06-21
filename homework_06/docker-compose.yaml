@@ -1,7 +1,10 @@
 version: '3.2'
 
 services:
-
+#  stocks_app:
+#    build:
+#      dockerfile: ./web_app/Dockerfile
+#      context: ./web_app
   database_local:
     image: postgres:12
     environment:
