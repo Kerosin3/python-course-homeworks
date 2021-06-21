@@ -41,9 +41,7 @@ from web_app.web_app.config.config import DevelopmentConfig
 # app.config['ENV'] = 'development'
 # app.config.update()
 # print("env is",app.config['ENV'])
-
 # app.config['DEBUG'] = True
-
 # app.config.from_object(config.config.)
 
 app.register_blueprint(stocks_app)
