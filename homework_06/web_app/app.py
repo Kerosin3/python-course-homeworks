@@ -2,7 +2,8 @@ import config
 from flask import Flask, render_template
 
 # import web_app.web_app.config.config
-from web_app.views.stocks.stocks import stocks_app
+# from web.app.web_app.views.stocks.stocks import stocks_app
+from web_app.web_app.views.stocks.stocks import stocks_app
 # from web_app.web_app.models import db
 # from .web_app.models import db
 from web_app.web_app.models.database import db
