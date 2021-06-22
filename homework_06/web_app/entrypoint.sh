@@ -1,4 +1,4 @@
-#!/user/bin/env bash
+#!/bin/bash
 
 echo "Starting.........."
 echo "Preforming migrations..."

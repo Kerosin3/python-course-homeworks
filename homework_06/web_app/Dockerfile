@@ -17,9 +17,11 @@ COPY . .
 
 EXPOSE 5000
 
-ENV FLASH_ENV=development
+#ENV FLASK_ENV=development
 
 RUN chmod +x entrypoint.sh
+RUN chmod +x initialize.sh
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["flask","run"]
-
+#CMD ["flask","run"]
+CMD ["./initialize.sh","-dev"]
+#CMD []

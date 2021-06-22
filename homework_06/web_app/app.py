@@ -1,8 +1,8 @@
 import config
 from flask import Flask, render_template
 
-import web_app.web_app.config.config
-from .web_app.views.stocks.stocks import stocks_app
+# import web_app.web_app.config.config
+from web_app.views.stocks.stocks import stocks_app
 # from web_app.web_app.models import db
 # from .web_app.models import db
 from web_app.web_app.models.database import db
@@ -24,7 +24,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:54
 
 # current_config = web_app.web_app.config.config.ProductionConfig
 # current_config = web_app.web_app.config.config.TestingConfig
-current_config = web_app.web_app.config.config
+# current_config = web_app.web_app.config.config
 # print("===========")
 # print(current_config.DevelopmentConfig.DATABASE_URI)
 # print("===========")

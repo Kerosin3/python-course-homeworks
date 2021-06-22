@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/bash
 #basi app initialiation
 #use -dev or -prod flag
 date0=$(date +'%d-%m-20%y')
