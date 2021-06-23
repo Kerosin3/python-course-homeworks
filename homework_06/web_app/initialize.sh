@@ -26,7 +26,7 @@ done
   #echo "Running Flask in Developer mode"
   #echo $FLASK_APP
   #echo $PWD
-  flask run
+  flask run --host=0.0.0.0
 else
   echo "file app does not exist, aborting"
   exit 1
