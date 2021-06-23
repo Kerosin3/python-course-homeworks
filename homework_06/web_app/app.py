@@ -8,7 +8,12 @@ from web_app.models.database import db
 
 
 app = Flask(__name__)
+
 app.config.from_object("config.DevelopmentConfig")
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB'
+
 
 app.register_blueprint(stocks_app)
 
