@@ -3,8 +3,6 @@ from os import getenv
 from flask import Flask, render_template
 from flask_migrate import Migrate
 
-import web_app
-
 from web_app.views import stocks_app
 from web_app.models.database import db
 
