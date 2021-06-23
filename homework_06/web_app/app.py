@@ -20,7 +20,8 @@ app = Flask(__name__)
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
 
 
 # current_config = web_app.web_app.config.config.ProductionConfig
