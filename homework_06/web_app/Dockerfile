@@ -1,7 +1,7 @@
 FROM python:3.9-buster
 
 WORKDIR /app
-
+ENV PYTHONPATH="${PYTHONPATH}:./"
 RUN pip install -U pip
 RUN pip install -U setuptools wheel
 RUN pip install poetry

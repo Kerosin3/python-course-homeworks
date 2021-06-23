@@ -3,10 +3,10 @@ from flask import Flask, render_template
 
 # import web_app.web_app.config.config
 # from web.app.web_app.views.stocks.stocks import stocks_app
-from web_app.web_app.views.stocks.stocks import stocks_app
+from web_app.views.stocks.stocks import stocks_app
 # from web_app.web_app.models import db
 # from .web_app.models import db
-from web_app.web_app.models.database import db
+from web_app.models.database import db
 from flask_migrate import Migrate
 from os import getenv
 
@@ -35,7 +35,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:54
 # # app.config.from_object('current_config.DevelopmentConfig')
 # print("===========")
 # print('env=',current_config.DevelopmentConfig)
-from web_app.web_app.config.config import DevelopmentConfig
+# from web_app.web_app.config.config import DevelopmentConfig
 # app.config.from_object(DevelopmentConfig)
 # print("env is",app.config['ENV'])
 # app.config['FLASK_ENV'] = 'development'

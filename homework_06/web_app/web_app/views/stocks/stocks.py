@@ -5,8 +5,8 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequest, InternalServerError
 from .stock_main import Stock,gen_stock_prices
 # from models import Stock_db
-from web_app.web_app.models.stocks import Stock_db
-from web_app.web_app.models import db
+from web_app.models.stocks import Stock_db
+from web_app.models import db
 stocks_app = Blueprint("stocks_app",
                        __name__,
                        url_prefix="/stocks"
