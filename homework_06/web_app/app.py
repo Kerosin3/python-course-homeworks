@@ -1,50 +1,19 @@
-import config
-from flask import Flask, render_template
-
-# import web_app.web_app.config.config
-# from web.app.web_app.views.stocks.stocks import stocks_app
-from web_app.views.stocks.stocks import stocks_app
-# from web_app.web_app.models import db
-# from .web_app.models import db
-from web_app.models.database import db
-from flask_migrate import Migrate
 from os import getenv
 
-SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB")
+from flask import Flask, render_template
+from flask_migrate import Migrate
 
+from web_app.views import stocks_app
+from web_app.models.database import db
 
 
 app = Flask(__name__)
 
-# app.config.from_object('config.DevelopmentConfig')
-
+app.config.from_object("config.DevelopmentConfig")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
 
-
-# current_config = web_app.web_app.config.config.ProductionConfig
-# current_config = web_app.web_app.config.config.TestingConfig
-# current_config = web_app.web_app.config.config
-# print("===========")
-# print(current_config.DevelopmentConfig.DATABASE_URI)
-# print("===========")
-# print('debug is ',current_config.DevelopmentConfig.DEBUG)
-# print("===========")
-# print('env=',current_config.DevelopmentConfig.ENV)
-# # app.config.from_object('current_config.DevelopmentConfig')
-# print("===========")
-# print('env=',current_config.DevelopmentConfig)
-# from web_app.web_app.config.config import DevelopmentConfig
-# app.config.from_object(DevelopmentConfig)
-# print("env is",app.config['ENV'])
-# app.config['FLASK_ENV'] = 'development'
-# app.config['ENV'] = 'development'
-# app.config.update()
-# print("env is",app.config['ENV'])
-# app.config['DEBUG'] = True
-# app.config.from_object(config.config.)
 
 app.register_blueprint(stocks_app)
 
@@ -83,5 +52,6 @@ def create_all_tables():
     with app.app_context():
         migrate.upgrade()
 
-# if __name__ == '__main__':
-#     app.run()
+
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0", port="5000")

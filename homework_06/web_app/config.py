@@ -6,22 +6,20 @@ SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:P
 class Config(object):  # default
     DEBUG = True
     TESTING = False
-    DATABASE_URI = SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
     DEBUG = True
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
     DEBUG = True
-    # DATABASE_URI = SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
     ENV = 'development'
+
 
 class TestingConfig(Config):
     TESTING = True

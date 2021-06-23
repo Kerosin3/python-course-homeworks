@@ -11,6 +11,7 @@ services:
       - 5000:5000
     depends_on:
       - database_local
+
   database_local:
     image: postgres:12
     environment:
