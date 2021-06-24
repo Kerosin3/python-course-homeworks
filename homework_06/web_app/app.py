@@ -11,35 +11,11 @@ SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:P
 
 app = Flask(__name__)
 
-# app.config.from_object('config.DevelopmentConfig')
-
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB'
+app.config.from_object("config.DevelopmentConfig")
 
-
-# current_config = web_app.web_app.config.config.ProductionConfig
-# current_config = web_app.web_app.config.config.TestingConfig
-# current_config = web_app.web_app.config.config
-# print("===========")
-# print(current_config.DevelopmentConfig.DATABASE_URI)
-# print("===========")
-# print('debug is ',current_config.DevelopmentConfig.DEBUG)
-# print("===========")
-# print('env=',current_config.DevelopmentConfig.ENV)
-# # app.config.from_object('current_config.DevelopmentConfig')
-# print("===========")
-# print('env=',current_config.DevelopmentConfig)
-# from web_app.web_app.config.config import DevelopmentConfig
-# app.config.from_object(DevelopmentConfig)
-# print("env is",app.config['ENV'])
-# app.config['FLASK_ENV'] = 'development'
-# app.config['ENV'] = 'development'
-# app.config.update()
-# print("env is",app.config['ENV'])
-# app.config['DEBUG'] = True
-# app.config.from_object(config.config.)
 
 app.register_blueprint(stocks_app)
 
