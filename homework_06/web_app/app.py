@@ -1,19 +1,26 @@
-import config
-from flask import Flask, render_template
-from web_app.models.database import db
-from flask_migrate import Migrate
 from os import getenv
-from web_app.views import stocks_app
-import config
 
-SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB")
+from flask import Flask, render_template
+from flask_migrate import Migrate
+
+from web_app.models.database import db
+from web_app.views import stocks_app
+
+import config
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB'
-app.config.from_object("config.DevelopmentConfig")  # not working!!
-
+workmode = getenv("FLASK_ENV", 'development')
+if workmode == 'development':
+    config_app = config.DevelopmentConfig
+elif workmode == 'production':
+    config_app = config.ProductionConfig
+elif workmode == 'test':
+    config_app = config.TestingConfig
+else:
+    raise EnvironmentError('Not right mode of initialization, aborting')
+app.config.from_object(config_app)
+print('=========== current env:',config_app.ENV)
 app.register_blueprint(stocks_app)
 
 db.init_app(app)

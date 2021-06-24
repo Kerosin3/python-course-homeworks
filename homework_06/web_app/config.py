@@ -1,6 +1,6 @@
 from os import getenv
 
-SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB")
+SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB')
 
 
 class Config(object):  # default
@@ -11,7 +11,8 @@ class Config(object):  # default
 
 
 class ProductionConfig(Config):
-    DEBUG = True
+    DEBUG = False
+    ENV = 'production'
 
 
 class DevelopmentConfig(Config):
@@ -24,3 +25,4 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
+    ENV = 'testing'
