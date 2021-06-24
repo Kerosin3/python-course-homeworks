@@ -1,15 +1,10 @@
 import config
 from flask import Flask, render_template
-
-# import web_app.web_app.config.config
-# from web.app.web_app.views.stocks.stocks import stocks_app
-# from web_app.views.stocks.stocks import stocks_app
-# from web_app.web_app.models import db
-# from .web_app.models import db
 from web_app.models.database import db
 from flask_migrate import Migrate
 from os import getenv
-from views import stocks_app
+from web_app.views import stocks_app
+
 SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB")
 
 
