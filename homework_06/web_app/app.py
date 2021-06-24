@@ -4,23 +4,20 @@ from web_app.models.database import db
 from flask_migrate import Migrate
 from os import getenv
 from web_app.views import stocks_app
+import config
 
 SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://USER:PASSWORD@localhost:5432/STOCKS_DB")
 
-
-
 app = Flask(__name__)
-
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB'
-app.config.from_object("config.DevelopmentConfig")
-
+app.config.from_object("config.DevelopmentConfig")  # not working!!
 
 app.register_blueprint(stocks_app)
 
 db.init_app(app)
-migrate = Migrate(app,db) #откуда он знает про db?
+migrate = Migrate(app, db)  # откуда он знает про db?
 
 
 @app.route("/")
@@ -45,7 +42,6 @@ def add():
 
 @app.route("/test/")
 def test():
-    # return jsonify(stock1)
     return render_template("test_page.html")
 
 
@@ -54,5 +50,6 @@ def create_all_tables():
     with app.app_context():
         migrate.upgrade()
 
+
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port="5000")
+    app.run(debug=True, host="0.0.0.0", port="5000") #REQUIRED!

@@ -1,15 +1,18 @@
 #!/bin/bash
 #basi app initialiation
-#use -dev or -prod flag
+#use -dev or -prod flags
+##use -f (flask), -p(python)  ====not implemented====
 date0=$(date +'%d-%m-20%y')
 echo current date is $date0
-#app_flask="$PWD"/"$( basename "web_app/app.py" )"
 flask_app="app.py"
 flask_app=$PWD/$flask_app
-#echo app is $flask_app
 if [ -e $flask_app ]
 then
   echo "file app exists"
+  if (( $# == 0 )); then
+    echo "you must specify at either -dev or -prod flag, aborting..."
+    exit 1
+fi
   while [ -n "$1" ]
   do
     case "$1" in
@@ -17,19 +20,15 @@ then
         export FLASK_ENV=development;;
     -prod) echo "Running in Production mode";;
     *) echo "$1 is not an option, use either dev or prod"
-      export FLASK_ENV=production;;
+      export FLASK_ENV=production
+      exit 1;;
 esac
 shift
 done
   echo flask_app is $flask_app
   export FLASK_APP=$flask_app
-  #echo "Running Flask in Developer mode"
-  #echo $FLASK_APP
-  #echo $PWD
   flask run --host=0.0.0.0
 else
   echo "file app does not exist, aborting"
   exit 1
 fi
-#docker-compose up database_local
-# FLASK_ENV=development flask db upgrade

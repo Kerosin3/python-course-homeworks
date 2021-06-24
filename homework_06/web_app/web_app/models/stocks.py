@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
-
-# from ..models.database import db
 from .database import db
 
+#implement foreignkey feature
 
 class Stock_db(db.Model):
     # __tablename__ = 'Stocks'
