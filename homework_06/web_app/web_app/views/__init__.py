@@ -1,1 +1,1 @@
-from .stocks.stocks import stocks_app
+from .stocks import stocks_app
