@@ -1,5 +1,5 @@
-# from .models import Stock,Sector,Financials
+# from .models import Stock,Sector,Financials,Dicty,KeyVal
 #
 # if __name__ == '__main__':
-#     a = Stock.financials.pe
-#     print(a)
+#     b = KeyVal.container.name()
+#
