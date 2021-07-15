@@ -15,4 +15,4 @@ class Command(BaseCommand):
         print(s0.__repr__())
         print(s0.prices.container.value_price)
         print(s0.prices.container.key_data)
-        # print(s0.prices.Laying)
+        print(s0.prices.container)

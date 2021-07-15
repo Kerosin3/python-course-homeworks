@@ -11,12 +11,13 @@ from collections import OrderedDict
 
 # current financials
 class Financials(models.Model):
-    pe = models.FloatField(default=0.0)
-    pb = models.FloatField(default=0.0)
+    pe = models.FloatField(default=0.0,null=True)
+    pb = models.FloatField(default=0.0,null=True)
     # mar_cap = models.FloatField(default=0.0)
 
 
 class Prices(models.Model):
+    id = models.AutoField(primary_key=True)
     value_price = models.FloatField(default=0.0, db_index=True)
     key_data = models.CharField(max_length=50,
                                 default='TEST_DATA',
@@ -24,8 +25,8 @@ class Prices(models.Model):
 
 
 class Laying(models.Model):
-    id = models.AutoField(primary_key=True)
-    container = models.ForeignKey(Prices, db_index=True, on_delete=models.CASCADE)
+    container = models.ForeignKey(Prices, db_index=True,
+                                  on_delete=models.CASCADE)
 
 
 class Stock(models.Model):
@@ -34,14 +35,14 @@ class Stock(models.Model):
                               , unique=True, max_length=4)
     current_price = models.DecimalField(max_digits=5,
                                         decimal_places=2,
-                                        blank=True,
+                                        blank=False,
                                         null=True,
                                         default=0.0)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     comment = models.TextField(blank=True)
-    prices = models.OneToOneField(Laying, on_delete=models.CASCADE, blank=True, null=True)
-    financials = models.ForeignKey(Financials, on_delete=models.CASCADE, blank=True, null=True)
+    prices = models.OneToOneField(Laying, on_delete=models.CASCADE,blank=False,null=True)
+    financials = models.ForeignKey(Financials, on_delete=models.CASCADE, blank=False, null=True)
 
     def __str__(self):
         return self.ticker
@@ -57,7 +58,7 @@ class Stock(models.Model):
 class Sector(models.Model):
     # enumerate it
     sector = models.CharField(max_length=20, unique=False)
-    stock = models.OneToOneField(Stock, on_delete=models.PROTECT, blank=True, null=True)
+    stock = models.OneToOneField(Stock, on_delete=models.PROTECT, blank=False, null=True)
 
 
 class Misc():
