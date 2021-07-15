@@ -1,5 +1,5 @@
 from django.core.management import BaseCommand
-from stocks.models import Stock,Prices  # not stocks.models
+from stocks.models import Stock, Prices, Financials, Sector  # not stocks.models
 from stocks.models import Misc
 
 
@@ -7,16 +7,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         Stock.objects.all().delete()
-        print('creating a test stock')
-        stock = Stock.objects.create(ticker='TEST',
-                                     current_price=666.6,
-                                     comment='test comment')
-        print(stock.ticker)
-        print(stock.current_price)
-        # prices = Prices.objects.create(value_price=111,
-        #                                key_data= '11.11.11')
-        # print(prices.value_price)
-        print(stock.prices) # None type !!
-        # stock.prices.key_data = '11.12.13' ....
-        # stock.save() ...
+        Prices.objects.all().delete()
+        Financials.objects.all().delete()
 
+        print('creating a test stock')
+        s0 = Misc.create_stockv2()
+        print(s0.__repr__())
+        print(s0.prices.container.value_price)
+        print(s0.prices.container.key_data)
+        # print(s0.prices.Laying)

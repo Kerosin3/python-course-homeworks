@@ -6,11 +6,12 @@
 </head>
 <body>
 <h1> Some text</h1>
-<h2>list:</h2>
+<h2>Current stocks list:</h2>
 <ul>
     {% for item in stocks %}
     <li>
-        {{item.ticker}}
+        stock's ticker is {{item.ticker}} and its current price is
+        {{item.current_price}}, p/e is {{item.financials.pe}}, p/b is {{item.financials.pb}}
     </li>
     {% endfor %}
 </ul>
