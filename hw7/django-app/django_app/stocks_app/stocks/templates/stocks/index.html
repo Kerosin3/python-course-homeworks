@@ -16,5 +16,9 @@
     </li>
     {% endfor %}
 </ul>
+<form method="post">
+    {% csrf_token %}
+    <button type ="submit">Save</button>
+</form>
 </body>
 </html>
