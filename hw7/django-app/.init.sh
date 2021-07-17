@@ -6,7 +6,7 @@ if [ "$( docker inspect -f '{{.State.Running}}' rabbitmq )" = "true" ]; then
   echo 'stopping running container'
   docker stop $image
   fi
-echo 'running new container'
+echo 'running RabbitMQ'
 (docker run -dt --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management) # not interactive
 
 
@@ -24,7 +24,8 @@ cl
 #shellcheck disable=SC2164
 #cd django_app/stocks_app
 cd $new_dir
-echo Deleting all saved data
+varPrint=$'=================== Deleting all saved data ==================='
+printf %q "$varPrint"
 rm data_tickers.txt
 echo starting App
 python manage.py runserver

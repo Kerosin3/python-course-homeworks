@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Stock
 import time
 from .tasks import save_stocks_task
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -13,11 +14,6 @@ def index_page(request):
         print('used get method')
     elif a_stock is not None and request.method == 'POST': # POST
         save_stocks_task.delay()
-        # a_stock = Stock.objects.all()
-        # with open('data_tickers.txt','w',encoding='utf-8') as filex:
-        #     for stock in a_stock:
-        #         filex.write(stock.ticker + '\n')
-        #raise Http404
     else:
         raise Http404
     return render(request, 'stocks/index.html',{'stocks':a_stock})

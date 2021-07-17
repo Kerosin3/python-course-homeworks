@@ -132,3 +132,5 @@ CELERY_BROKER_URL = 'amqp://localhost' # rabbitmq
 # CELERY_ACCEPT_CONTENT = ['application/json']
 # CELERY_RESULT_SERIALIZER = 'json'
 # CELERY_TASK_SERIALIZER = 'json'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/app-messages' # change this to a proper location
