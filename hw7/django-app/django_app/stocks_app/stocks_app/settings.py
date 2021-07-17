@@ -128,9 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #celery
 # CELERY_BROKER_URL = 'redis://localhost:6379' # redis
 CELERY_BROKER_URL = 'amqp://localhost' # rabbitmq
+CELERY_RESULT_BACKEND = 'rpc://'
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 # CELERY_ACCEPT_CONTENT = ['application/json']
 # CELERY_RESULT_SERIALIZER = 'json'
 # CELERY_TASK_SERIALIZER = 'json'
-# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-# EMAIL_FILE_PATH = 'tmp/app-messages' # change this to a proper location
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'tmp/app-messages' # change this to a proper location

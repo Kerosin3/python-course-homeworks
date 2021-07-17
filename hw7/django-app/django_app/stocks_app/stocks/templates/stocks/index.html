@@ -20,5 +20,10 @@
     {% csrf_token %}
     <button type ="submit">Save</button>
 </form>
+<hr>
+{% if task_id %}
+  current task id is: {{task_id}}
+<a href="/task/?task_id={{task_id}}">{{task_id}}</a>
+{% endif %}
 </body>
 </html>
