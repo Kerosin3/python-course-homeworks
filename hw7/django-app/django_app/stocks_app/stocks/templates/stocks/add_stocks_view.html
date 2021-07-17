@@ -6,7 +6,18 @@
 
 
 {% block body %}
-    <button type="button" class="btn btn-primary btn-sm">Small button</button>
+{#    <button type="button" class="btn btn-primary btn-sm">Small button</button>#}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-sm">Add this stock</button>
 
+
+    </form>
+    {#<form action="/your-name/" method="post">#}
+    {#    <label for="your_name">Your name: </label>#}
+    {#    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">#}
+    {#    <input type="submit" value="OK">#}
+    {#</form>#}
 
 {% endblock %}

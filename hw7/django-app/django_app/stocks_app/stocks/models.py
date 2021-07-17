@@ -25,7 +25,7 @@ class Stock(models.Model):
                                         default=0.0)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
-    finances = models.OneToOneField(Financials, on_delete=models.CASCADE)
+    finances = models.OneToOneField(Financials, on_delete=models.CASCADE, null=True, blank=True)
     comment = models.TextField(blank=True)
 
     def __str__(self):

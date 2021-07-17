@@ -1,0 +1,17 @@
+{% extends 'stocks/base.html' %}
+
+{% block title %}
+    stock {{ object.ticker }} details page 11
+{% endblock %}
+
+
+{% block body %}
+    <h1> Stock's details</h1>
+<div class="bg-light p-5 rounded">
+<h1> The stocks ticker is {{ object }}</h1>
+<h2>its current price is <p class="text-primary">{{ object.current_price }}$</p>
+</h2>
+</div>
+
+
+{% endblock %}
