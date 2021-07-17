@@ -1,29 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Some title </title>
-</head>
-<body>
-<h1> Some text</h1>
-<h2>Current stocks list:</h2>
-<ul>
-    {% for item in stocks %}
-    <li>
-        stock's ticker is {{item.ticker}} and its current price is
-        {{item.current_price}}, p/e is {{item.finances.pe}}, p/b is {{item.finances.pb}},
-        prices history: %unimplemented%
-    </li>
-    {% endfor %}
-</ul>
-<form method="post">
-    {% csrf_token %}
-    <button type ="submit">Save</button>
-</form>
-<hr>
-{% if task_id %}
-  current task id is: {{task_id}}
-<a href="/task/?task_id={{task_id}}">{{task_id}}</a>
-{% endif %}
-</body>
-</html>
+{% extends 'stocks/base.html' %}
+
+{% block title %}
+    stock details 111
+{% endblock %}
+
+
+{% block body %}
+    <h1> Some text</h1>-->
+    <h2>Current stocks list:</h2>-->
+    <ul>-->
+        {% for item in stocks %}-->
+            <li>-->
+                stock's ticker is {{ item.ticker }} and its current price is-->
+                {{ item.current_price }}, p/e is {{ item.finances.pe }}, p/b is {{ item.finances.pb }},-->
+                prices history: %unimplemented%-->
+            </li>-->
+        {% endfor %}-->
+    </ul>-->
+    <form method="post">-->
+        {% csrf_token %}-->
+        <button type="submit">Save</button>
+        -->
+    </form>-->
+    <hr>-->
+    {% if task_id %}-->
+        current task id is: {{ task_id }}-->
+        <a href="/task/?task_id={{ task_id }}">{{ task_id }}</a>-->
+    {% endif %}-->
+
+{% endblock %}
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Some title </title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1> Some text</h1>-->
+<!--<h2>Current stocks list:</h2>-->
+<!--<ul>-->
+<!--    {% for item in stocks %}-->
+    <!--    <li>-->
+    <!--        stock's ticker is {{item.ticker}} and its current price is-->
+    <!--        {{item.current_price}}, p/e is {{item.finances.pe}}, p/b is {{item.finances.pb}},-->
+    <!--        prices history: %unimplemented%-->
+    <!--    </li>-->
+    <!--    {% endfor %}-->
+<!--</ul>-->
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <button type ="submit">Save</button>-->
+<!--</form>-->
+<!--<hr>-->
+<!--{% if task_id %}-->
+    <!--  current task id is: {{task_id}}-->
+    <!--<a href="/task/?task_id={{task_id}}">{{task_id}}</a>-->
+    <!--{% endif %}-->
+<!--</body>-->
+<!--</html>-->

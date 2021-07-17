@@ -32,3 +32,12 @@ def status_view(request):
     return render(request, 'stocks/status_view.html',
                   {'task_id':task_id,
                   'status':status})
+
+def home_view(request):
+    return render(request, 'stocks/home_page.html'
+                  )
+
+
+def add_stocks_view(request):
+    return render(request, 'stocks/add_stocks_view.html'
+                  )

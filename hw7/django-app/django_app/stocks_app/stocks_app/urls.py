@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from stocks.views import index_page, status_view
+from stocks.views import index_page, status_view, home_view, add_stocks_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_page),
-    path('task/', status_view)
+    path('task/', status_view),
+    path('home/', home_view),
+    path('add_stocks/', add_stocks_view),
 ]
