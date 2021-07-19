@@ -1,7 +1,9 @@
 #!/usr/bin/zsh
 #use clean flag to clean up the project
+#use fresh flag to recreate DB
+#just launch the scrip to run reserver
 
-echo current directory is $(pwd)
+#echo current directory is $(pwd)
 main_dir=$(pwd)
 
 while [ -n "$1" ]
@@ -17,9 +19,23 @@ do
       echo deleting messsages
       rm data_tickers.txt
     fi
+    db_file=db.sqlite3
+    if [ -f $db_file ]; then
+      echo deleting database
+      rm db.sqlite3
+    fi
     if [ -d $emails_db ]; then
       echo deleting messsages db
       rm -r $emails_db
+    fi
+    migrations_name=migrations
+    migrations_dir=stocks/migrations
+    new_dir2="$new_dir/$migrations_dir"
+#    echo $new_dir2
+    if [ -d $new_dir2 ]; then
+      echo deleting migrations
+      rm -r $new_dir2/*
+      touch $new_dir2/__init__.py
     fi
     if [ "$( docker inspect -f '{{.State.Running}}' rabbitmq )" = "true" ]; then
       image=$(docker ps -aqf "name=rabbitmq")
@@ -28,6 +44,15 @@ do
     fi
     echo finishing cleaning
     exit 1;;
+  -fresh) echo recreating DB
+    # shellcheck disable=SC2164
+    cd django_app/stocks_app
+    ls
+    python manage.py makemigrations
+    python manage.py migrate
+    echo Migrations creationg has been finished
+    exit 1;;
+
 esac
 shift
 done
