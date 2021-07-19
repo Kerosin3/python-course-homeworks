@@ -31,7 +31,10 @@ do
 esac
 shift
 done
-
+echo Preforming poetry update
+python -m pip install --upgrade pip
+pip install poetry
+poetry update
 if [ "$( docker inspect -f '{{.State.Running}}' rabbitmq )" = "true" ]; then
   image=$(docker ps -aqf "name=rabbitmq")
   echo 'stopping running container'
