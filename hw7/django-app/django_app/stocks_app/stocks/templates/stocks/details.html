@@ -11,7 +11,13 @@
 <h1> The stocks ticker is {{ object }}</h1>
 <h2>its current price is <p class="text-primary">{{ object.current_price }}$</p>
 </h2>
+<!--    <a href="/stocks/remove_conform"-->
 </div>
-
+<div>
+    <form method="post">
+  {% csrf_token %}
+  <button class="alert-danger" type="submit">remove this stock</button>
+    </form>
+</div>
 
 {% endblock %}

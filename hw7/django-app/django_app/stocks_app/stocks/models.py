@@ -10,6 +10,8 @@ class Financials(models.Model):
     pe = models.FloatField(default=0.0, null=True)
     pb = models.FloatField(default=0.0, null=True)
     # mar_cap = models.FloatField(default=0.0)
+    def __str__(self):
+        return f"pe={self.pe},pb={self.pb}"
 
 
 class Stock(models.Model):

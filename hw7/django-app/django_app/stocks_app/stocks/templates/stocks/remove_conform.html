@@ -1,0 +1,19 @@
+{% extends 'stocks/base.html' %}
+
+{% block title %}
+    Removing {{ object.ticker }}
+{% endblock %}
+
+
+{% block body %}
+    <h1> Stock {{object.name}} details</h1>
+<div class="bg-light p-5 rounded">
+  Are you sure?
+  <form method="post">
+  {% csrf_token %}
+  <button class="alert" type="submit">remove stock(Unimplimented)</button>
+    </form>
+</div>
+
+
+{% endblock %}

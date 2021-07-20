@@ -14,6 +14,8 @@
                 stock's ticker is <a href="/stock/{{item.pk}}/">{{ item.ticker }}</a> and its current price is
                 {{ item.current_price }}, p/e is {{ item.finances.pe }}, p/b is {{ item.finances.pb }},
                 prices history: %unimplemented%
+                <a class="btn btn-danger" href="/stock/remove/{{item.pk}}">Remove this stock</a>-->
+                <a class="btn btn-info" href="/stock/update/{{item.pk}}">Edit stock's data</a>-->
             </li>
         {% endfor %}
     </ul>

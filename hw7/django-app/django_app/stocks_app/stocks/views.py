@@ -5,7 +5,7 @@ import time
 from .tasks import save_stocks_task, send_mail_task
 from celery import current_app
 from django.core.paginator import Paginator
-from django.views.generic import ListView, DeleteView, DetailView, CreateView
+from django.views.generic import ListView, DeleteView, DetailView, CreateView, UpdateView
 
 
 # Create your views here.
@@ -41,6 +41,12 @@ class CreateStockView(CreateView):
     success_url = '/'
 
 
+class UpdateStockView(UpdateView):
+    model = Stock
+    fields = '__all__'
+    template_name = 'stocks/add_stocks_view.html'
+    success_url = '/'
+
 class StockListView(ListView):
     model = Stock  # loads all
     paginate_by = 5
@@ -53,6 +59,10 @@ class StockDetailsView(DetailView):
     model = Stock
     template_name = 'stocks/details.html'
 
+class RemoveStocksView(DeleteView):
+    model = Stock
+    template_name = 'stocks/remove_conform.html'
+    success_url = '/'
 
 def status_view(request):
     task_id = request.GET['task_id']
