@@ -25,8 +25,8 @@ class Stock(models.Model):
                                         blank=False,
                                         null=True,
                                         default=0.0)
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=False)
+    updated_at = models.DateTimeField(auto_now=True, null=False)
     finances = models.OneToOneField(Financials, on_delete=models.CASCADE, null=True, blank=True)
     comment = models.TextField(blank=True)
 
@@ -41,13 +41,16 @@ class Stock(models.Model):
         # f'record date is {self.created_at},' \
 
     @classmethod
-    def create_stock(cls):
+    def create_stock(cls,name:str='Test'):
         fin = Financials.objects.create(
             pe=get_rand_data(),
             pb=get_rand_data(),
         )
+        if name == 'Test':
+            ticker = gen_ticker()
+            name = ticker
         stock_temp = Stock.objects.create(
-            ticker=gen_ticker(),
+            ticker=name,
             current_price=get_rand_data(),
             comment='comment aaa',
             finances=fin
