@@ -9,6 +9,7 @@ from .models_misc import get_rand_data, get_cur_data, gen_ticker
 class Financials(models.Model):
     pe = models.FloatField(default=0.0, null=True)
     pb = models.FloatField(default=0.0, null=True)
+
     # mar_cap = models.FloatField(default=0.0)
     def __str__(self):
         return f"pe={self.pe},pb={self.pb}"
@@ -40,8 +41,15 @@ class Stock(models.Model):
         # f'p/b is {self.financials.pb},' \
         # f'record date is {self.created_at},' \
 
+    def check_name(self, ticker_to_check: str):
+        tickerz = self.stocks_set.all()
+        for tick in tickerz:
+            if tick.ticker == ticker_to_check:
+                return 1
+        return 0
+
     @classmethod
-    def create_stock(cls,name:str='Test'):
+    def create_stock(cls, name: str = 'Test'):
         fin = Financials.objects.create(
             pe=get_rand_data(),
             pb=get_rand_data(),
