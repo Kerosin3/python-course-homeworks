@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<title>
+    {% block title %}
+        Default title
+    {% endblock %}
+</title>
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    {#        <script> src = "{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"</script>#}
+
+    {#   legacy fonting code    #}
+    {#        <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>#}
+    {#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/SquadaOne-Regular.ttf') }}">#}
+    {#         <link rel="stylesheet" href="{{ url_for('static',filename='fonts/DaddyTimeMono_Nerd_Font_Complete.ttf') }}">#}
+    {#        <link rel="stylesheet" href="{{ url_for('static',filename='fonts/OpenDyslexicAlta Bold Nerd Font Complete.otf') }}">#}
+    {#        <link href="../static/fonts/style.css" rel="stylesheet"/>#}
+    {% block head %}
+        <style>
+
+            @font-face {
+                font-family: "OpenDyslexicAlta";
+                src: url("{{ url_for('static', filename='fonts/OpenDyslexicAlta-Regular.eot') }}?") format("eot"),
+                url("{{ url_for('static', filename='fonts/OpenDyslexicAlta-Regular.woff') }}?") format("woff"),
+                url("{{ url_for('static', filename='fonts/OpenDyslexicAlta-Regular.ttf') }}?") format("truetype"),
+                url("{{ url_for('static', filename='fonts/OpenDyslexicAlta-Regular.svg') }}?") format("svg");
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            body {
+                font-family: OpenDyslexicAlta, serif;
+                font-size: 22px;
+                background-color: aliceblue;
+            }
+
+            h1 {
+                background-color: yellowgreen;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        </style>
+        <title> a title?</title>
+    {% endblock %}
+</head>
+
+
+<body>
+
+{# nav bar #}
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('stocks_app.list') }}"> Stocks app</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a href="{{ url_for('products') }}"
+                   class="nav-link {% if request.endpoint == 'products' -%}active{%- endif %}">
+                    Show products
+                </a>
+            </div>
+        <div class="navbar-nav">
+                <a href="{{ url_for('add') }}"
+                   class="nav-link {% if request.endpoint == 'add' -%}active{%- endif %}">
+                    Add product
+                </a>
+            </div>
+        <div class="navbar-nav">
+                <a href="{{ url_for('test') }}"
+                   class="nav-link {% if request.endpoint == 'test' -%}active{%- endif %}">
+                    Test_Test
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

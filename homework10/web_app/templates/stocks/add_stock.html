@@ -1,0 +1,26 @@
+{% extends 'stocks/base.html' %}
+
+{% block title %}
+    this is an stock add page
+{% endblock %}
+
+
+{% block body %}
+    <h1> Here you cann add a stock, please enter a ticker</h1>
+    <div>
+        <h1>add new stock</h1>
+        <form method="post">
+            <label for="stock_ticker">Stock ticker:</label>
+            <input
+                    id="stock_ticker_input"
+                    name="stock_ticker"
+                    type="text"
+                    minlength="4"
+                    maxlength="4"
+                    placeholder="NVDA"
+                    required
+            >
+            <button type="submit">Add</button>
+        </form>
+    </div>
+{% endblock %}

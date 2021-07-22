@@ -1,0 +1,23 @@
+version: '3.2'
+
+services:
+  stocks_app:
+    build:
+      context: ./web_app
+      dockerfile: ./Dockerfile
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql://USER:PASSWORD@database_local:5432/STOCKS_DB
+    ports:
+      - 5000:5000
+    depends_on:
+      - database_local
+  database_local:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: "STOCKS_DB"
+      POSTGRES_USER: "USER"
+      POSTGRES_PASSWORD: "PASSWORD"
+    volumes:
+      - ./db_data/pg-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
