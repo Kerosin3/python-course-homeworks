@@ -27,7 +27,8 @@ shift
 done
   echo flask_app is $flask_app
   export FLASK_APP=$flask_app
-  flask run --host=0.0.0.0
+  flask run --host='0.0.0.0'
+#  flask run #--host='0.0.0.0'
 else
   echo "file app does not exist, aborting"
   exit 1

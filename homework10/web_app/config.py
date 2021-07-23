@@ -8,7 +8,8 @@ class Config(object):  # default
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
-
+    HOST = 'http://localhost'  #
+    PORT = '5000'
 
 class ProductionConfig(Config):
     DEBUG = False

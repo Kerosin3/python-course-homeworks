@@ -71,7 +71,7 @@ def add_stock():
     return redirect(url)
 
 
-@stocks_app.route("/plot/")
+@stocks_app.route("/plot/",endpoint='plot')
 def plot():
     return "This feature has not been implemented yet, but we are working hard"
 
@@ -97,8 +97,45 @@ def remove_stock():
         raise BadRequest('No such stock')
 
 
-@stocks_app.route('/reset',methods=['DELETE'],endpoint='reset')
+@stocks_app.route('/reset/',methods=['DELETE'],endpoint='reset')
 def reset_stocks():
-    add_stock_to_db('KLOP')
-    add_stock_to_db('PLOK')
-    return  {'ok':True}
+    # db.session.query(Stock_db).delete()
+    # db.session.commit()
+
+    # # print('all stocks',stocks_all)
+    try:
+        stocks = Stock_db.query.all()
+        Stock_db.db.session.delete(stocks)
+        # stocks_all = Stock_db.query.all()
+    #     c=0
+    #     for s in stocks_all:
+    #         c+=1
+    #         db.session.delete(s)
+    #     print('C is == ',c)
+        # db.session.query(Stock_db).delete()
+        # # stockz.delete()
+        # # print('stocks are ================ ',stockz)
+        # stocks_all = Stock_db.query.all()
+        # db.session.query(Stock_db).delete()
+        # db.session.commit()
+        return {'ok': True}
+    except:
+        db.session.rollback()
+        return {'ok': False}
+
+
+@stocks_app.route('/c&d/', methods=['DELETE'], endpoint='c&d')
+def c_and_d():
+    test_ticker = 'LLLL'
+    add_stock_to_db(test_ticker)
+    obj = db.session.query(Stock_db).filter(Stock_db.name == test_ticker).one_or_none()  # stock_ticker not in STOCKS_DB:
+    if obj is not  None:
+        db.session.delete(obj)
+        db.session.commit()
+        return {'ok': True}
+    else:
+        return {'ok': False}
+
+@stocks_app.route('/test/', methods=['DELETE'], endpoint='test')
+def dull_func():
+    return {'ok': True}
