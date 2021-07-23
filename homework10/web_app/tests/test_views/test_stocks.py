@@ -1,6 +1,6 @@
 from flask import url_for
 from pytest import fixture
-from web_app.app import app
+from app import app
 
 # from web_app import app
 @fixture
