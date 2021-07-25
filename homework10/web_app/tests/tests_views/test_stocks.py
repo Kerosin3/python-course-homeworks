@@ -37,6 +37,13 @@ def test_dull_test(client):
     print('data content is ', data)
     assert data == {'ok':True}
 
+def test_add_stock(session):
+     test_stock = Stock_db()
+     test_stock.name = 'adas'
+     test_stock.price = random.randint(0, 99)
+     db.session.add(test_stock)
+     db.session.commit()
+
 # #not working
 # def test_add_stock(session):
 #     # connection = db.engine.connect()
