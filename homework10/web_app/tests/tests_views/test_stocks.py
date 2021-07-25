@@ -37,12 +37,18 @@ def test_dull_test(client):
     print('data content is ', data)
     assert data == {'ok':True}
 
-def test_add_stock(session):
-     test_stock = Stock_db()
-     test_stock.name = 'adas'
-     test_stock.price = random.randint(0, 99)
-     db.session.add(test_stock)
-     db.session.commit()
+
+#add FUNCTION!!!!
+# def add_stock_to_db(ticker: str):
+#     test_stock = Stock_db()
+#     test_stock.name = ticker
+#     test_stock.price = random.randint(0, 99)
+#     db.session.add(test_stock)
+#     db.session.commit()
+#     return 0
+
+def test_add_stock(client):
+     add_stock_to_db('TEST')
 
 # #not working
 # def test_add_stock(session):
