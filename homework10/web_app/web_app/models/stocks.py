@@ -14,6 +14,10 @@ class Stock_db(db.Model):
 
 def gen_stock_db() -> Stock_db:
     return Stock_db()
+
+
+def test_me_models():
+    return True
 #
 # class Prices(db.Model):
 #     __tablename__ = 'Prices'

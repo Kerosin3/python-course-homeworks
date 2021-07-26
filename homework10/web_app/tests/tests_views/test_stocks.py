@@ -13,6 +13,24 @@ def client():
         with app.app_context():
             yield test_client
 
+
+# def test_add_stock(client):
+#     add_stock_to_db('TEST')
+
+def test_dull_test(client):
+    url = url_for("stocks_app.test")
+    response = client.delete(url)
+    data = response.json
+    print('data content is ', data)
+    assert data == {'ok':True}
+
+def test_add_stocks1(client):
+    url = url_for('add')
+    response = client.get(url)
+    data = response
+    print('data content is ===== ', data)
+    assert str(response) == '<Response streamed [200 OK]>'
+
 # @pytest.fixture(scope='session')
 # def db(app):
 #
@@ -30,12 +48,12 @@ def client():
 #     session = db.create_scoped_session(options=options)
 #     yield session
 
-def test_dull_test(client):
-    url = url_for("stocks_app.test")
-    response = client.delete(url)
-    data = response.json
-    print('data content is ', data)
-    assert data == {'ok':True}
+# def test_dull_test(client):
+#     url = url_for("stocks_app.test")
+#     response = client.delete(url)
+#     data = response.json
+#     print('data content is ', data)
+#     assert data == {'ok':True}
 
 
 #add FUNCTION!!!!
@@ -47,8 +65,7 @@ def test_dull_test(client):
 #     db.session.commit()
 #     return 0
 
-def test_add_stock(client):
-     add_stock_to_db('TEST')
+
 
 # #not working
 # def test_add_stock(session):
@@ -66,15 +83,15 @@ def test_add_stock(client):
 #     # connection.close()
 #     # session.remove()
 
-def test_add_methods(client):
-    url = url_for("add")
-    response = client.get(url)
-    rez = 0
-    if '200 OK' in str(response):
-        rez = 1
-    else:
-        rez = 0
-    assert rez == 1
+# def test_add_methods(client):
+#     url = url_for("add")
+#     response = client.get(url)
+#     rez = 0
+#     if '200 OK' in str(response):
+#         rez = 1
+#     else:
+#         rez = 0
+#     assert rez == 1
 
 # def test_reset_stocks(client):
 #     url = url_for("stocks_app.reset")
