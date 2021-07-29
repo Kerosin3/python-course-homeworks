@@ -13,6 +13,7 @@ app = Flask(__name__)
 # app.config.update(SERVER_NAME='myapp.dev:5000')
 app.config['SERVER_NAME'] = '0.0.0.0:5000'
 workmode = getenv("FLASK_ENV", 'development')
+
 if workmode == 'development':
     config_app = config.DevelopmentConfig
 elif workmode == 'production':

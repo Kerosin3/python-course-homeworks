@@ -19,6 +19,13 @@ def add_stock_to_db(ticker: str):
     db.session.commit()
     return 0
 
+def create_stock(ticker: str):
+    test_stock = Stock_db()
+    test_stock.name = ticker
+    test_stock.price = random.randint(0, 99)
+    # db.session.add(test_stock)
+    # db.session.commit()
+    return test_stock
 
 @stocks_app.route("/<string:stock_ticker>/")
 def get_stock(stock_ticker):
@@ -47,7 +54,7 @@ def main_page():
     return redirect(url)
 
 
-@stocks_app.route("/add/", methods=["GET", "POST"])
+@stocks_app.route("/add/", methods=["GET", "POST"],endpoint='add') #,endpoint='add'
 def add_stock():
     if request.method == "GET":  # returning a template
         return render_template("stocks/add_stock.html")

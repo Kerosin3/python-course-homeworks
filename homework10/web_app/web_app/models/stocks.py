@@ -7,7 +7,7 @@ class Stock_db(db.Model):
     # __tablename__ = 'Stocks'
     # __mapper_args__ = {'eager_defaults',True}
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=False, server_default='')
+    name = Column(String, nullable=False, unique=True, server_default='')
     price = Column(Integer, nullable=True, unique=False, server_default='0')
     # prices = relationship('Prices',back_populates='pe_indexes')
 

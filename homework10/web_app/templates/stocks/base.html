@@ -74,8 +74,8 @@
                 </a>
             </div>
             <div class="navbar-nav">
-                <a href="{{ url_for('stocks_app.add_stock') }}"
-                   class="nav-link {% if request.endpoint == 'add' -%}active{%- endif %}">
+                <a href="{{ url_for('stocks_app.add') }}"
+                   class="nav-link {% if request.endpoint == 'stocks_app.add' -%}active{%- endif %}">
                     Add stock
                 </a>
             </div>
